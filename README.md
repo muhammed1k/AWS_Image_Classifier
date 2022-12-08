@@ -21,10 +21,10 @@ A ResNET18 pretrained model was used for finetuning on this task and the followi
 - epochs: [2,4,6]
 
 hyperparameter tuning job:
-![]('imgs/tuning-job.png')
+![](./imgs/tuning-job.png)
 
 Training job:
-![]('imgs/training-job.png')
+![](./imgs/training-job.png)
 
 ## Debugging and Profiling
 **Debugger Configs**: the following sagemaker smdebug rules are hooked to the training pytorch scripts and the sagemaker estimator in the notebook to track the following metrics during training
@@ -42,7 +42,7 @@ Training job:
 
 **Profiler** Revealed Low GPU Utilization
 
-profiler Full HTML report included [Report](/profiler_report.html)
+profiler Full HTML report included [Report](./profiler-report.html)
 
 
 ## Model Deployment
