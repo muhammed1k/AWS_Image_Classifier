@@ -42,7 +42,7 @@ Training job:
 
 **Profiler** Revealed Low GPU Utilization
 
-profiler Full HTML report included [Report](/profiler_report.html)
+profiler Full HTML report included [Report](./profiler-report.html)
 
 
 ## Model Deployment
