@@ -60,12 +60,12 @@ profiler Full HTML report included [Report](./profiler-report.html)
 
 
 ## Model Deployment
-- The Sagemaker estimator model is deployed to a sagemaker maker endpoint on machine of instance-type: ml.m4.xlarge 
+- The Sagemaker estimator model is deployed to a sagemaker maker endpoint on machine of instance-type: ml.p2.xlarge 
 - the endpoint can be queried by send requests to the endpoint through a Pytorch estimator using inference.py
 - the json object to be sent in the GET Request to the API can have contentType:"images/jpeg" and image as bytesArray
 
 Deployed Model Endpoint in Service:
-![]('imgs/model-endpoint.png')
+![](./imgs/model-endpoint.png)
 
 Prediction from Queried endpoint:
-![]('imgs/prediction.png')
+![](./imgs/prediction.png)
