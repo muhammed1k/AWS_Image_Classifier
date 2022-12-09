@@ -65,7 +65,7 @@ profiler Full HTML report included [Report](./profiler-report.html)
 - the json object to be sent in the GET Request to the API can have contentType:"images/jpeg" and image as bytesArray
 
 Deployed Model Endpoint in Service:
-![](./imgs/model-endpoint.png)
+![](./imgs/deployed-endpoint.png)
 
 Prediction from Queried endpoint:
 ![](./imgs/prediction.png)
