@@ -35,9 +35,11 @@ A ResNET50 pretrained model was used for finetuning on this task and the followi
 - epochs: [2,4]
 
 **hyperparameter tuning job**:
+
 ![](./imgs/tuning-job.png)
 
 **Training job**:
+
 ![](./imgs/training-job.png)
 
 ## Debugging and Profiling
@@ -65,7 +67,9 @@ profiler Full HTML report included [Report](./profiler-report.html)
 - the json object to be sent in the GET Request to the API can have contentType:"images/jpeg" and image as bytesArray
 
 **Deployed Model Endpoint in Service**:
+
 ![](./imgs/deployed-endpoint.png)
 
 **Prediction from Queried endpoint**:
+
 ![](./imgs/prediction.png)
