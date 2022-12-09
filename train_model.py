@@ -12,6 +12,7 @@ from torchvision import datasets
 import argparse
 from smdebug import modes
 from smdebug.pytorch import get_hook
+import smdebug.pytorch as smd
 
 import logging
 import sys
@@ -26,7 +27,7 @@ logger.addHandler(logging.StreamHandler(sys.stdout))
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-def test(model,criterion,device):
+def test(model,criterion,device,hook):
     '''
     TODO: Complete this function that can take a model and a 
           testing data loader and will get the test accuray/loss of the model
@@ -34,6 +35,7 @@ def test(model,criterion,device):
     '''
     print("testing on whole dataset")
     model.eval()
+    hook.set_mode(smd.modes.EVAL)
     running_loss = 0.0
     running_samples = 0.0
     running_corrects = 0.0 
@@ -61,7 +63,7 @@ def test(model,criterion,device):
         )
         )
 
-def train(model, criterion, optimizer,device):
+def train(model, criterion, optimizer,device,hook):
     '''
     TODO: Complete this function that can take a model and
           data loaders for training and will get train the model
@@ -73,7 +75,6 @@ def train(model, criterion, optimizer,device):
     best_loss = 1e6
     loss_counter = 0
     
-    hook = get_hook(create_if_not_exists=True)
     if hook:
         hook.register_loss(criterion)
     
@@ -84,12 +85,12 @@ def train(model, criterion, optimizer,device):
             if phase == 'train':
                 model.train()
                 if hook:
-                    hook.set_mode(modes.TRAIN)
+                    hook.set_mode(smd.modes.TRAIN)
                 
             else:
                 model.eval()
                 if hook:
-                    hook.set_mode(modes.EVAL)
+                    hook.set_mode(smd.modes.EVAL)
                 
                 
             running_loss = 0.0
@@ -147,9 +148,9 @@ def net():
     TODO: Complete this function that initializes your model
           Remember to use a pretrained model
     '''
-    model = models.resnet18(pretrained=True)
+    model = models.resnet50(pretrained=True)
     for param in model.parameters():
-        param.require_grad = False
+        param.requires_grad = False
         
     num_features = model.fc.in_features
     model.fc = nn.Sequential(
@@ -200,27 +201,32 @@ def main(args):
     
     model = model.to(device)
     
+    hook = smd.Hook.create_from_json_file()
+    hook.register_module(model)
+    
     '''
     TODO: Create your loss and optimizer
     '''
     loss_criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.fc.parameters(), lr=0.001)
     
+    hook.register_loss(loss_criterion)
+    
     '''
     TODO: Call the train function to start training your model
     Remember that you will need to set up a way to get training data from S3
     '''
-    model=train(model, loss_criterion, optimizer,device)
+    model=train(model, loss_criterion, optimizer,device,hook)
     
     '''
     TODO: Test the model to see its accuracy
     '''
-    test(model, loss_criterion,device)
+    test(model, loss_criterion,device,hook)
     
     '''
     TODO: Save the trained model
     '''
-    #torch.save(model, "/")
+    torch.save(model.state_dict(), os.path.join(args.model_dir, "model.pth"))
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
