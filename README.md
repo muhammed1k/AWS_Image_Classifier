@@ -29,10 +29,10 @@ The project is designed to be dataset independent so if there is a dataset that 
 Upload the data to an S3 bucket through the AWS Gateway so that SageMaker has access to the data. 
 
 ## Hyperparameter Tuning
-A ResNET18 pretrained model was used for finetuning on this task and the following hyperparameters values were tuned:
+A ResNET50 pretrained model was used for finetuning on this task and the following hyperparameters values were tuned:
 - batch-size: [32,64,128,256,512]
 - learning-rate: range(0.001,0.1)
-- epochs: [2,4,6]
+- epochs: [2,4]
 
 hyperparameter tuning job:
 ![](./imgs/tuning-job.png)
