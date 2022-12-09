@@ -34,10 +34,10 @@ A ResNET50 pretrained model was used for finetuning on this task and the followi
 - learning-rate: range(0.001,0.1)
 - epochs: [2,4]
 
-hyperparameter tuning job:
+**hyperparameter tuning job**:
 ![](./imgs/tuning-job.png)
 
-Training job:
+**Training job**:
 ![](./imgs/training-job.png)
 
 ## Debugging and Profiling
@@ -64,8 +64,8 @@ profiler Full HTML report included [Report](./profiler-report.html)
 - the endpoint can be queried by send requests to the endpoint through a Pytorch estimator using inference.py
 - the json object to be sent in the GET Request to the API can have contentType:"images/jpeg" and image as bytesArray
 
-Deployed Model Endpoint in Service:
+**Deployed Model Endpoint in Service**:
 ![](./imgs/deployed-endpoint.png)
 
-Prediction from Queried endpoint:
+**Prediction from Queried endpoint**:
 ![](./imgs/prediction.png)
